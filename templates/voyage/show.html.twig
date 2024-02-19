@@ -1,0 +1,66 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Voyage{% endblock %}
+
+{% block body %}
+   
+
+    <table class="table" style="border: 2px solid black; background-color: white;">
+        <tbody>
+            <tr>
+                <th style="color: black;"><strong>Réference du voyage</strong></th>
+                <td style="color: black;"><strong>{{ voyage.id }}</strong></td>
+            </tr>
+            <tr>
+                <td colspan="2" style="border-bottom: 2px solid black;"></td> <!-- Ligne de séparation -->
+            </tr>
+            <tr>
+                <th style="color: black;"><strong>VilleDepart</strong></th>
+                <td style="color: black;"><strong>{{ voyage.villeDepart }}</strong></td>
+            </tr>
+            <tr>
+                <td colspan="2" style="border-bottom: 2px solid black;"></td> <!-- Ligne de séparation -->
+            </tr>
+            <tr>
+                <th style="color: black;"><strong>Destination</strong></th>
+                <td style="color: black;"><strong>{{ voyage.destination }}</strong></td>
+            </tr>
+            <tr>
+                <td colspan="2" style="border-bottom: 2px solid black;"></td> <!-- Ligne de séparation -->
+            </tr>
+            <tr>
+                <th style="color: black;"><strong>HeureDepart</strong></th>
+                <td style="color: black;"><strong>{{ voyage.heureDepart ? voyage.heureDepart|date('H:i:s') : '' }}</strong></td>
+            </tr>
+            <tr>
+                <td colspan="2" style="border-bottom: 2px solid black;"></td> <!-- Ligne de séparation -->
+            </tr>
+            <tr>
+                <th style="color: black;"><strong>HeureArrivee</strong></th>
+                <td style="color: black;"><strong>{{ voyage.heureArrivee ? voyage.heureArrivee|date('H:i:s') : '' }}</strong></td>
+            </tr>
+            <tr>
+                <td colspan="2" style="border-bottom: 2px solid black;"></td> <!-- Ligne de séparation -->
+            </tr>
+            <tr>
+                <th style="color: black;"><strong>TypeVoyage</strong></th>
+                <td style="color: black;"><strong>{{ voyage.typeVoyage }}</strong></td>
+            </tr>
+            <tr>
+                <td colspan="2" style="border-bottom: 2px solid black;"></td> <!-- Ligne de séparation -->
+            </tr>
+            <tr>
+                <th style="color: black;"><strong>Type</strong></th>
+                <td style="color: black;"><strong>{{ voyage.type }}</strong></td>
+            </tr>
+        </tbody>
+    </table>
+
+    <div style="text-align: center;"> <!-- Centrer les liens -->
+        <a href="{{ path('app_voyage_index') }}" style="color: white;">back to list</a>
+        
+        <a href="{{ path('app_voyage_edit', {'id': voyage.id}) }}" style="color: white;">edit</a>
+    </div>
+
+    {{ include('voyage/_delete_form.html.twig') }}
+{% endblock %}

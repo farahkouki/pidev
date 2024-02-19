@@ -1,0 +1,51 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Reservation{% endblock %}
+
+{% block body %}
+    <table class="table" style="border: 2px solid black; background-color: white;">
+        <tbody>
+            
+            
+            <tr>
+                <th style="color: black;"><strong>Nom</strong></th>
+                <td style="color: black;"><strong>{{ reservation.nom }}</strong></td>
+            </tr>
+            <tr>
+                <td colspan="2" style="border-bottom: 2px solid black;"></td> <!-- Ligne de séparation -->
+            </tr>
+            <tr>
+                <th style="color: black;"><strong>Prenom</strong></th>
+                <td style="color: black;"><strong>{{ reservation.prenom }}</strong></td>
+            </tr>
+            <tr>
+                <td colspan="2" style="border-bottom: 2px solid black;"></td> <!-- Ligne de séparation -->
+            </tr>
+            <tr>
+                <th style="color: black;"><strong>Email</strong></th>
+                <td style="color: black;"><strong>{{ reservation.email }}</strong></td>
+            </tr>
+            <tr>
+                <td colspan="2" style="border-bottom: 2px solid black;"></td> <!-- Ligne de séparation -->
+            </tr>
+            <tr>
+                <th style="color: black;"><strong>NumeroTelephone</strong></th>
+                <td style="color: black;"><strong>{{ reservation.numeroTelephone }}</strong></td>
+            </tr>
+            <tr>
+                <td colspan="2" style="border-bottom: 2px solid black;"></td> <!-- Ligne de séparation -->
+            </tr>
+            <tr>
+                <th style="color: black;"><strong>Réference Voyage</strong></th>
+                <td style="color: black;"><strong>{{ reservation.voyage.id }}</strong></td>
+            </tr>
+        </tbody>
+    </table>
+
+    <div style="text-align: center;"> <!-- Centrer les liens -->
+        <a href="{{ path('app_reservation_index') }}" style="color: white;">back to list</a>
+        <a href="{{ path('app_reservation_edit', {'id': reservation.id}) }}" style="color: white;">edit</a>
+    </div>
+
+    {{ include('reservation/_delete_form.html.twig') }}
+{% endblock %}
