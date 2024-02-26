@@ -3,6 +3,7 @@
 namespace App\Controller;
 
 use App\Entity\Equipement;
+use App\Entity\Evenement;
 use App\Form\Equipement1Type;
 use App\Repository\EquipementRepository;
 use Doctrine\ORM\EntityManagerInterface;
@@ -30,7 +31,14 @@ class EquipementAdminController extends AbstractController
         $form->handleRequest($request);
 
         if ($form->isSubmitted() && $form->isValid()) {
+            $evenement = new Evenement();
+            $evenement->setNom('evenement_' . $equipement->getNomEquipe());
+            $evenement->setType('type_' . $equipement->getNomEquipe());
+            $evenement->addEquipement($equipement);
+            $equipement->addEvenement($evenement);
+
             $entityManager->persist($equipement);
+            $entityManager->persist($evenement);
             $entityManager->flush();
 
             return $this->redirectToRoute('app_equipement_admin_index', [], Response::HTTP_SEE_OTHER);

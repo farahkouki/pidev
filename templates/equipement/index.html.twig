@@ -13,27 +13,27 @@
                 <th style="color: blue;">ID</th>
                 <th style="color: blue;">Nom d'équipe</th>
                 <th style="color: blue;">Nombre</th>
+                <th style="color: blue;">type</th>
                 <th style="color: blue;">Action</th>
-                <!--<th style="color: blue;"></th>-->
             </tr>
         </thead>
         <tbody>
             {% for equipement in equipements %}
                 <tr>
                     <td>{{ equipement.id }}</td>
-                    
+                    <td>{{ equipement.nomEquipe }}</td>
                     <td>{{ equipement.Nbr }}</td>
                     <td>{{ equipement.type }}</td>
                     <td>
                         <a href="{{ path('app_equipement_show', {'id': equipement.id}) }}" style="background-color: green; color: white;" class="btn">Voir</a>
-                        <a href="{{ path('app_equipement_edit', {'id': equipement.id}) }}" style="background-color: orange; color: white;" class="btn">Modifier</a>
-                        {{ include('equipement/_delete_form.html.twig', {'equipement': equipement}) }}
+                       <!-- <a href="{{ path('app_equipement_edit', {'id': equipement.id}) }}" style="background-color: orange; color: white;" class="btn">Modifier</a>-->
+                       <!-- {{ include('equipement/_delete_form.html.twig', {'equipement': equipement}) }}-->
                     </td>
                 </tr>
             {% endfor %}
         </tbody>
     </table>
 
-    <a href="{{ path('app_equipement_new') }}" style="background-color: green; color: white;" class="btn">Ajouter un équipement</a>
+   <a href="{{ path('app_reclamation_new') }}" style="background-color: green; color: white;" class="btn">Ajouter reclamation </a>
     
 {% endblock %}

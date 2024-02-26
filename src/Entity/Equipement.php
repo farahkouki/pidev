@@ -43,6 +43,11 @@ class Equipement
      */
     private $evenements;
 
+    /**
+     * @ORM\OneToMany(targetEntity=Reclamation::class, mappedBy="equipement")
+     */
+    private $reclamation;
+
     // Getters and setters...
 
     public function __construct()
@@ -53,6 +58,16 @@ class Equipement
     public function getId(): ?int
     {
         return $this->id;
+    }
+    
+    public function getReclamation(): Reclamation
+    {
+        return $this->reclamation;
+    }
+    
+    public function setReclamation(Reclamation $reclamation)
+    {
+        $this->reclamation = $reclamation;
     }
 
     public function getNomEquipe(): ?string
