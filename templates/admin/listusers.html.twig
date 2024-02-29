@@ -1,0 +1,51 @@
+{% extends 'base1.html.twig' %}
+
+{% block title %}User index{% endblock %}
+
+{% block body %}
+
+
+<div style="text-align: center;">
+    <form action="{{ path('search_users') }}" method="get" class="search-form">
+    <input type="text" name="search_query" placeholder="Search...">
+    <button type="submit" class="btn-link">Search</button>
+    </form>
+    </div>
+
+
+
+    <table class="table">
+        <thead>
+            <tr>
+                <th>Id</th>
+                <th>Email</th>
+                <th>Nom</th>
+                <th>Prenom</th>
+                <th>DateNaissance</th>
+                <th>NumeroTelephone</th>
+                <th>actions</th>
+            </tr>
+        </thead>
+        <tbody>
+        {% for user in users %}
+            <tr>
+                <td>{{ user.id }}</td>
+                <td>{{ user.email }}</td>
+                <td>{{ user.nom }}</td>
+                <td>{{ user.prenom }}</td>
+                <td>{{ user.dateNaissance ? user.dateNaissance|date('Y-m-d') : '' }}</td>
+                <td>{{ user.numeroTelephone }}</td>
+                <td>
+                    <a href="{{ path('app_admin_user_show', {'id': user.id}) }}">show</a>
+                    <a href="{{ path('app_admin_user_edit', {'id': user.id}) }}">edit</a>
+                </td>
+            </tr>
+        {% else %}
+            <tr>
+                <td colspan="10">no records found</td>
+            </tr>
+        {% endfor %}
+        </tbody>
+    </table>
+
+{% endblock %}

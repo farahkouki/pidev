@@ -1,0 +1,53 @@
+{% extends 'base1.html.twig' %}
+{% block title %}Administrateur{% endblock %}
+{% block body %}
+
+
+<div class="container">
+    <div class="row">
+        <div class="col-md-3">
+        </div>
+        <div class="col-md-2">
+
+            <div>
+              
+                <div class="row">
+                    <div class="col-md-6 offset-md-4">
+    <table class="table table-bordered" style="background-color: white;">
+                            <thead>
+                            <tr>
+                                <th>Utilisateur</th>
+                                <th>Vérifié</th>
+                                <th>Rôles</th>
+
+                            </tr>
+                            </thead>
+                            <tbody>
+                            {% for user in users %}
+                                <tr>
+                                    <td>
+                                        - Nom:<br> {{ user.nom }}<br>
+                                        - Email: <br>{{ user.email }}
+
+                                    </td>
+                                    <td>
+                                        <br> {{ user.isVerified }}<br>
+                                    </td>
+                                    <td>
+                                        {% for role in user.roles %}
+                                            {{ role }}
+                                        {% endfor %}
+                                    </td>
+
+
+                                </tr>
+
+                            {% endfor %}
+
+
+                            </tbody>
+                        </table>
+                        
+                        {% endblock %}
+                        {% block footer %}
+{% endblock %}

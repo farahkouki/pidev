@@ -1,0 +1,63 @@
+{% extends 'base1.html.twig' %}
+{% block title %}Rôles des utilisateurs{% endblock %}
+{% block body %}
+
+
+
+<div class="container">
+    <div class="row">
+        <div class="col-md-3">
+        </div>
+        <div class="col-md-7">
+
+            <div>
+                <br>
+                <br>
+
+                <div class="row">
+                    <div class="col-md-6 offset-md-4">
+                        <style>
+                            .table-border th,
+                            .table-border td {
+                                border-width: 3px; /* Ajustez l'épaisseur selon vos besoins */
+                            }
+                        </style>
+
+                        <table class="table table-bordered table-border">
+                            <thead>
+        <tr>
+            <th>Utilisateur</th>
+            <th>Rôles</th>
+            <th>Actions</th> {# Ajout de la colonne Actions #}
+        </tr>
+        </thead>
+        <tbody>
+        <br>
+        <br>
+        {% for user in users %}
+            <tr>
+                <td>
+                    - Nom:<br> {{ user.nom }}<br>
+                    - Prénom:<br> {{ user.prenom }}<br>
+                    - Email: <br>{{ user.email }}
+
+                </td>
+                <td>
+                    {% for role in user.roles %}
+                        {{ role }}
+                    {% endfor %}
+                </td>
+                <td>
+                    <a href="{{ path('admin_edit_roles', { 'id': user.id }) }}" class="btn btn-primary">Modifier Rôle</a>
+                </td>
+
+            </tr>
+
+        {% endfor %}
+
+
+        </tbody>
+    </table>
+{% endblock %}
+                        {% block footer %}
+{% endblock %}

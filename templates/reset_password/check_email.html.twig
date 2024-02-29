@@ -1,0 +1,60 @@
+{% extends 'base2.html.twig' %}
+
+{% block header %}
+
+{% endblock %}
+
+{% block sidebar %}
+
+{% endblock %}
+
+{% block footer %}
+
+{% endblock %}
+
+{% block body %}
+
+    <div class="container">
+
+        <section class="section register min-vh-100 d-flex flex-column align-items-center justify-content-center py-4">
+            <div class="container">
+                <div class="row justify-content-center">
+                    <div class="col-lg-4 col-md-6 d-flex flex-column align-items-center justify-content-center">
+
+                        <div class="d-flex justify-content-center py-4">
+                            <a href="index.html" class="logo d-flex align-items-center w-auto">
+                               
+                                <span  class="d-none d-lg-block">Impactful Journeys</span>
+                            </a>
+                        </div><!-- End Logo -->
+
+                        <div class="card mb-3">
+
+                            <div class="card-body">
+
+                                <div class="pt-4 pb-2">
+{#                                    <h5 class="card-title text-center pb-0 fs-4">Se connecter à votre compte</h5>#}
+                                </div>
+
+                                <form method="post" style="background-color: #fff; padding: 20px;">
+
+    <p>
+        If an account matching your email exists, then an email was just sent that contains a link that you can use to reset your password.
+        This link will expire in {{ resetToken.expirationMessageKey|trans(resetToken.expirationMessageData, 'ResetPasswordBundle') }}.
+    </p>
+    <p>If you don't receive an email please check your spam folder or <a href="{{ path('app_forgot_password_request') }}">try again</a>.</p>
+
+                            </div>
+                        </div>
+
+
+                    </div>
+                </div>
+            </div>
+
+        </section>
+
+    </div>
+
+
+{% endblock %}

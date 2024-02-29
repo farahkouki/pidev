@@ -1,0 +1,52 @@
+{% extends 'base1.html.twig' %}
+
+{% block title %}Modifier le Rôle de {{ user.name }}-{{ user.prenom }} {% endblock %}
+
+{% block body %}
+
+    <div class="container">
+        <div class="row">
+            <div class="col-md-3"></div>
+            <div class="col-md-7">
+                <br>
+                <br>
+                <br>
+                <br>
+
+                <p>Vous modifiez le rôle de l'utilisateur : <strong>{{ user.nom }} {{ user.prenom }}</strong></p>
+
+                {{ form_start(form) }}
+
+                <style>
+                    .table-border th,
+                    .table-border td {
+                        border-width: 3px; /* Ajustez l'épaisseur selon vos besoins */
+                    }
+                </style>
+
+                <table class="table table-bordered table-border">
+                    <tbody>
+                    <tr>
+                        <td>{{ form_label(form.roles, 'Rôles') }}</td>
+                        <td>
+                            {{ form_widget(form.roles, {'attr': {'class': 'form-check'}}) }}
+                            {{ form_help(form.roles) }}
+                            {{ form_errors(form.roles) }}
+                        </td>
+                    </tr>
+                    </tbody>
+                </table>
+
+                <button type="submit" class="btn btn-primary">Enregistrer les Rôles</button>
+                {{ form_end(form) }}
+                <br>
+
+                <a href="{{ path('app_list_users') }}" class="btn btn-secondary">Retour à la Liste des Utilisateurs</a>
+            </div>
+        </div>
+    </div>
+
+{% endblock %}
+
+   {% block footer %}
+   {% endblock %}
