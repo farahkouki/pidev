@@ -11,9 +11,9 @@
                 <h1 class="text-center mb-4">Nouvelle Réclamation</h1>
                 <form method="post" action="{{ path('app_reclamation_new') }}">
                     {{ form_start(form) }}
-                    <div class="mb-3">
+                    <div style="color: white;margin-bottom: 5px">
                         {{ form_label(form.message) }}
-                        {{ form_widget(form.message, {'attr': {'class': 'form-control'}}) }}
+                        {{ form_widget(form.message, {'attr': {'class': 'form-control', 'style': 'color: white; border: 1px solid white'}}) }}
                     </div>
 
                     <button type="submit" class="btn btn-primary">Créer</button>

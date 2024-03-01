@@ -17,6 +17,10 @@ class Reclamation
      */
     private ?int $id = null;
 
+    /**
+     * @ORM\Column(type="string", length=255)
+     * @Assert\NotBlank(message="Le champ message ne peut pas être vide")
+     */
     private string $message;
 
     /**

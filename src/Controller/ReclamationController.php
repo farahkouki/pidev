@@ -13,15 +13,14 @@ use Symfony\Component\Routing\Annotation\Route;
 
 class ReclamationController extends AbstractController
 {
-    #[Route('/reclamation/{equipementId<\d+>}', name: 'app_reclamation')]
-    public function index($equipementId, ReclamationRepository $reclamationRepository): Response
+    #[Route('/reclamation', name: 'app_reclamation')]
+    public function index( ReclamationRepository $reclamationRepository): Response
     {
         return $this->render('reclamation/index.html.twig', [
-            'reclamations' => $reclamationRepository->findBy([
-                'equipement' => $equipementId]
-            )
+            'reclamations' => $reclamationRepository->findAll(),
         ]);
     }
+
     #[Route('/reclamation/new', name: 'app_reclamation_new', methods: ['GET', 'POST'])]
     public function newReclamation(Request $request, EntityManagerInterface $entityManager): Response
     {
@@ -33,11 +32,19 @@ class ReclamationController extends AbstractController
             $entityManager->persist($reclamation);
             $entityManager->flush();
 
-            return $this->redirectToRoute('app_reclamation_new', [], Response::HTTP_SEE_OTHER);
+            return $this->redirectToRoute('app_reclamation', [], Response::HTTP_SEE_OTHER);
         }
 
         return $this->renderForm('reclamation/new.html.twig', [
             'form' => $form,
+        ]);
+    }
+
+    #[Route('/reclamation/{message}', name: 'app_reclamation_show', methods: ['GET'])]
+    public function show(reclamation $reclamation): Response
+    {
+        return $this->render('reclamation/show.html.twig', [
+            'reclamation' => $reclamation,
         ]);
     }
 }
