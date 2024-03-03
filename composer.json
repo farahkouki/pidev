@@ -7,20 +7,38 @@
         "php": ">=8.0.2",
         "ext-ctype": "*",
         "ext-iconv": "*",
+        "bacon/bacon-qr-code": "^2.0",
+        "doctrine/annotations": "^2.0",
+        "doctrine/doctrine-bundle": "^2.11",
+        "doctrine/doctrine-migrations-bundle": "^3.3",
+        "doctrine/orm": "^2.18",
+        "dompdf/dompdf": "^2.0",
+        "endroid/qr-code": "^5.0",
+        "endroid/qr-code-bundle": "^5.0",
+        "endroid/qrcode": "^5.0",
+        "endroid/qrcode-bundle": "^5.0",
+        "sensio/framework-extra-bundle": "^6.2",
+        "symfony/asset": "6.0.*",
         "symfony/console": "6.0.*",
         "symfony/dotenv": "6.0.*",
         "symfony/flex": "^2",
+        "symfony/form": "6.0.*",
         "symfony/framework-bundle": "6.0.*",
         "symfony/runtime": "6.0.*",
+        "symfony/security-csrf": "6.0.*",
+        "symfony/twig-bundle": "6.0.*",
+        "symfony/validator": "6.0.*",
         "symfony/yaml": "6.0.*"
     },
     "require-dev": {
+        "symfony/maker-bundle": "^1.50"
     },
     "config": {
         "allow-plugins": {
             "composer/package-versions-deprecated": true,
             "symfony/flex": true,
-            "symfony/runtime": true
+            "symfony/runtime": true,
+            "endroid/installer": true
         },
         "optimize-autoloader": true,
         "preferred-install": {
@@ -67,4 +85,6 @@
             "require": "6.0.*"
         }
     }
+
+    
 }

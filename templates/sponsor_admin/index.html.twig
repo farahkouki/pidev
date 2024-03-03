@@ -1,0 +1,78 @@
+{% extends 'base1.html.twig' %}
+
+{% block title %}Sponsor index{% endblock %}
+
+{% block body %}
+    <div class="container mt-4">
+        <h1 class="text-center">Liste des sponsors</h1>
+        <br>
+
+        <!-- Search Input with Bootstrap styles -->
+        <div class="input-group mb-3">
+            <input type="text" class="form-control" id="searchInput" placeholder="Recherche..." aria-label="Recherche" aria-describedby="searchButton">
+            <div class="input-group-append">
+                <button class="btn btn-primary" type="button" id="searchButton">
+                    <i class="fas fa-search"></i> Rechercher
+                </button>
+            </div>
+        </div>
+
+        <br>
+
+        <!-- Table with Bootstrap styles -->
+        <div class="table-responsive">
+            <table class="table table-bordered table-hover" id="sponsorTable">
+                <thead class="thead-dark">
+                    <tr>
+                        <th>Id</th>
+                        <th>Nom</th>
+                        <th>Adresse</th>
+                        <th>Mail</th>
+                        <th>Telephone</th>
+                        <th>DateCreation</th>
+                        <th>Actions</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    {% for sponsor in sponsors %}
+                        <tr class="sponsor-row"
+                            data-id="{{ sponsor.id }}"
+                            data-nom="{{ sponsor.nom }}"
+                            data-adresse="{{ sponsor.adresse }}"
+                            data-mail="{{ sponsor.mail }}"
+                            data-telephone="{{ sponsor.telephone }}"
+                            data-date-creation="{{ sponsor.dateCreation ? sponsor.dateCreation|date('Y-m-d H:i:s') : '' }}">
+                            <td>{{ sponsor.id }}</td>
+                            <td>{{ sponsor.nom }}</td>
+                            <td>{{ sponsor.adresse }}</td>
+                            <td>{{ sponsor.mail }}</td>
+                            <td>{{ sponsor.telephone }}</td>
+                            <td>{{ sponsor.dateCreation ? sponsor.dateCreation|date('Y-m-d H:i:s') : '' }}</td>
+                            <td>
+                                <a href="{{ path('app_sponsor_admin_show', {'id': sponsor.id}) }}" class="btn btn-info btn-sm">Show</a>
+                            </td>
+                        </tr>
+                    {% else %}
+                        <tr>
+                            <td colspan="7">No records found</td>
+                        </tr>
+                    {% endfor %}
+                </tbody>
+            </table>
+        </div>
+    </div>
+
+    <script src="https://code.jquery.com/jquery-3.6.4.min.js"></script>
+    <script>
+        $(document).ready(function () {
+            $('#searchInput').on('input', function () {
+                var searchTerm = $(this).val().toLowerCase();
+
+                $('.sponsor-row').each(function () {
+                    var rowData = $(this).text().toLowerCase();
+                    $(this).toggle(rowData.includes(searchTerm));
+                });
+            });
+        });
+    </script>
+{% endblock %}

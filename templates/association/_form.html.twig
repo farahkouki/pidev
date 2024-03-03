@@ -1,0 +1,37 @@
+{# templates/association/_form.html.twig #}
+{{ form_start(form, {'attr': {'class': 'custom-form custom-form-background mx-auto'}}) }}
+<h2 class="mb-4 text-center">Create a new association</h2>
+
+<div class="form-group">
+    {{ form_label(form.nom, 'Nom de l\'association', {'label_attr': {'class': 'font-weight-bold'}}) }}
+    {{ form_widget(form.nom, {'attr': {'class': 'form-control', 'placeholder': 'Entrez le nom de l\'association'}}) }}
+</div>
+
+<div class="form-group">
+    {{ form_label(form.description, 'Description', {'label_attr': {'class': 'font-weight-bold'}}) }}
+    {{ form_widget(form.description, {'attr': {'class': 'form-control', 'placeholder': 'Entrez la description'}}) }}
+</div>
+
+<div class="form-group">
+    {{ form_label(form.adresse, 'Adresse', {'label_attr': {'class': 'font-weight-bold'}}) }}
+    {{ form_widget(form.adresse, {'attr': {'class': 'form-control', 'placeholder': 'Entrez l\'adresse'}}) }}
+</div>
+
+<div class="form-group">
+    {{ form_label(form.email, 'Email', {'label_attr': {'class': 'font-weight-bold'}}) }}
+    {{ form_widget(form.email, {'attr': {'class': 'form-control', 'placeholder': 'Entrez l\'adresse email'}}) }}
+</div>
+
+<div class="form-group">
+    {{ form_label(form.numeroTelephone, 'Numéro de téléphone', {'label_attr': {'class': 'font-weight-bold'}}) }}
+    {{ form_widget(form.numeroTelephone, {'attr': {'class': 'form-control', 'placeholder': 'Entrez le numéro de téléphone'}}) }}
+</div>
+
+<div class="form-group">
+    {{ form_label(form.dateCreation, 'Date de création', {'label_attr': {'class': 'font-weight-bold'}}) }}
+    {{ form_widget(form.dateCreation, {'attr': {'class': 'form-control', 'placeholder': 'Entrez la date de création'}}) }}
+</div>
+
+<button type="submit" class="btn btn-success btn-block mt-3 custom-button">Enregistrer</button>
+
+{{ form_end(form) }}
