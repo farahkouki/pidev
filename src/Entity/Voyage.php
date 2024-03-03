@@ -60,14 +60,42 @@ class Voyage
      */
     private $reservations;
 
+   
     public function __construct()
     {
+        $this->activites = [];
         $this->reservations = new ArrayCollection();
+       
+        // Autres initialisations...
+    }
+
+    /**
+     * @ORM\Column(type="array", nullable=true)
+     */
+    private $activites;
+
+   
+
+    public function getActivites(): ?array
+    {
+        return $this->activites;
+    }
+
+    public function setActivites(?array $activites): self
+    {
+        $this->activites = $activites;
+        return $this;
     }
 
     public function __toString()
 {
-    return $this->villeDepart . ' - ' . $this->destination;
+    if (is_array($this->destination)) {
+        // Si destination est un tableau, convertissez-le en chaîne de caractères en le joignant avec une virgule
+        return $this->villeDepart . ' - ' . implode(', ', $this->destination);
+    } else {
+        // Sinon, retournez simplement la valeur de la propriété destination
+        return $this->villeDepart . ' - ' . $this->destination;
+    }
 }
 
     public function getId(): ?int

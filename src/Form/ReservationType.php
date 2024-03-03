@@ -17,6 +17,7 @@ class ReservationType extends AbstractType
             ->add('email')
             ->add('numeroTelephone')
             ->add('voyage')
+            
         ;
     }
 

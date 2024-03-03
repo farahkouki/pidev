@@ -19,26 +19,26 @@ class Reservation
 
     /**
      * @ORM\Column(type="string", length=255)
-     * @Assert\NotBlank(message="Le champ nom ne peut pas être vide")
+     * @Assert\NotBlank(message="veuillez renseigner ce champ")
      */
     private $nom;
 
     /**
      * @ORM\Column(type="string", length=255)
-     * @Assert\NotBlank(message="Le champ prénom ne peut pas être vide")
+     * @Assert\NotBlank(message="veuillez renseigner ce champ")
      */
     private $prenom;
 
     /**
      * @ORM\Column(type="string", length=255)
-     * @Assert\NotBlank(message="L'adresse email ne peut pas être vide")
+     * @Assert\NotBlank(message="veuillez renseigner ce champ")
      * @Assert\Email(message="L'adresse email n'est pas valide")
      * @Assert\Regex("/@/")
      */
     private $email;
   /**
      * @ORM\Column(type="string", length=20)
-     * @Assert\NotBlank(message="Le numéro de téléphone ne peut pas être vide")
+     * @Assert\NotBlank(message="veuillez respecter le format requis")
      * @Assert\Length(
      *      min = 8,
      *      max = 8,
