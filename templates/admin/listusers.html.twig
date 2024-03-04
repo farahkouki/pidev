@@ -3,19 +3,38 @@
 {% block title %}User index{% endblock %}
 
 {% block body %}
+<div class="container mt-4">
+    <form action="{{ path('search_users') }}" method="get" class="search-form mb-3">
+        <div class="input-group">
+            <input type="text" name="search_query" class="form-control" placeholder="Search...">
+            
+            <!-- Sorting Options -->
+            <div class="input-group-append">
+                <label for="sort_field" class="input-group-text">Sort by:</label>
+                <select name="sort_field" class="form-control">
+                    <option value="prenom">First Name</option>
+                    <option value="nom">Last Name</option>
+                    <option value="email">Email</option>
+                    <!-- Add more options as needed -->
+                </select>
+            </div>
 
+            <div class="input-group-append">
+                <label for="sort_order" class="input-group-text">Order:</label>
+                <select name="sort_order" class="form-control">
+                    <option value="asc">Ascending</option>
+                    <option value="desc">Descending</option>
+                </select>
+            </div>
 
-<div style="text-align: center;">
-    <form action="{{ path('search_users') }}" method="get" class="search-form">
-    <input type="text" name="search_query" placeholder="Search...">
-    <button type="submit" class="btn-link">Search</button>
+            <div class="input-group-append">
+                <button type="submit" class="btn btn-primary">Search</button>
+            </div>
+        </div>
     </form>
-    </div>
 
-
-
-    <table class="table">
-        <thead>
+    <table class="table table-bordered">
+        <thead class="thead-dark">
             <tr>
                 <th>Id</th>
                 <th>Email</th>
@@ -23,7 +42,7 @@
                 <th>Prenom</th>
                 <th>DateNaissance</th>
                 <th>NumeroTelephone</th>
-                <th>actions</th>
+                <th>Actions</th>
             </tr>
         </thead>
         <tbody>
@@ -36,16 +55,16 @@
                 <td>{{ user.dateNaissance ? user.dateNaissance|date('Y-m-d') : '' }}</td>
                 <td>{{ user.numeroTelephone }}</td>
                 <td>
-                    <a href="{{ path('app_admin_user_show', {'id': user.id}) }}">show</a>
-                    <a href="{{ path('app_admin_user_edit', {'id': user.id}) }}">edit</a>
+                    <a href="{{ path('app_admin_user_show', {'id': user.id}) }}" class="btn btn-info btn-sm">Show</a>
+                    <a href="{{ path('app_admin_user_edit', {'id': user.id}) }}" class="btn btn-warning btn-sm">Edit</a>
                 </td>
             </tr>
         {% else %}
             <tr>
-                <td colspan="10">no records found</td>
+                <td colspan="7" class="text-center">No records found</td>
             </tr>
         {% endfor %}
         </tbody>
     </table>
-
+</div>
 {% endblock %}

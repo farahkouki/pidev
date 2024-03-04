@@ -1,43 +1,76 @@
 {% extends 'base.html.twig' %}
 
-{% block title %}User{% endblock %}
+{% block title %}Utilisateur{% endblock %}
 
 {% block body %}
 
-    <table class="table table-bordered" style="background-color: white;">
-        <tbody>
-           
-            <tr>
-                <th>Email</th>
-                <td>{{ user.email }}</td>
-            </tr>
-            <tr>
-                <th>Roles</th>
-                <td>{{ user.roles ? user.roles|json_encode : '' }}</td>
-            </tr>
-           
-           
-            <tr>
-                <th>Nom</th>
-                <td>{{ user.nom }}</td>
-            </tr>
-            <tr>
-                <th>Prenom</th>
-                <td>{{ user.prenom }}</td>
-            </tr>
-            <tr>
-                <th>DateNaissance</th>
-                <td>{{ user.dateNaissance ? user.dateNaissance|date('Y-m-d') : '' }}</td>
-            </tr>
-            <tr>
-                <th>NumeroTelephone</th>
-                <td>{{ user.numeroTelephone }}</td>
-            </tr>
-        </tbody>
-    </table>
+    {% if user is not null %}
+        <table class="table table-bordered" style="background-color: transparent;">
+            <tbody>
+                <tr>
+                    <th style="color: white;">Email</th>
+                    <td style="color: white;">{{ user.email }}</td>
+                </tr>
+                <tr>
+                    <th style="color: white;">Roles</th>
+                    <td style="color: white;">{{ user.roles ? user.roles|json_encode : '' }}</td>
+                </tr>
+                <tr>
+                    <th style="color: white;">Nom</th>
+                    <td style="color: white;">{{ user.nom }}</td>
+                </tr>
+                <tr>
+                    <th style="color: white;">Prénom</th>
+                    <td style="color: white;">{{ user.prenom }}</td>
+                </tr>
+                <tr>
+                    <th style="color: white;">Date de Naissance</th>
+                    <td style="color: white;">{{ user.dateNaissance ? user.dateNaissance|date('Y-m-d') : '' }}</td>
+                </tr>
+                <tr>
+                    <th style="color: white;">Numéro de Téléphone</th>
+                    <td style="color: white;">{{ user.numeroTelephone }}</td>
+                </tr>
+            </tbody>
+        </table>
 
+        <div class="d-flex justify-content-between align-items-center">
+            <a href="{{ path('app_user_edit', {'id': user.id}) }}" class="btn btn-light">Modifier</a>
+            <form action="{{ path('app_user_delete', {'id': user.id}) }}" method="post">
+                <input type="hidden" name="_method" value="DELETE">
+                <button type="submit" class="btn btn-outline-light">Supprimer</button>
+            </form>
+        </div>
 
-    <a href="{{ path('app_user_edit', {'id': user.id}) }}">Edit</a>
+    {% else %}
+        <table class="table table-bordered" style="background-color: transparent;">
+            <tbody>
+                <tr>
+                    <th style="color: white;">Email</th>
+                    <td style="color: white;">-</td>
+                </tr>
+                <tr>
+                    <th style="color: white;">Roles</th>
+                    <td style="color: white;">-</td>
+                </tr>
+                <tr>
+                    <th style="color: white;">Nom</th>
+                    <td style="color: white;">-</td>
+                </tr>
+                <tr>
+                    <th style="color: white;">Prénom</th>
+                    <td style="color: white;">-</td>
+                </tr>
+                <tr>
+                    <th style="color: white;">Date de Naissance</th>
+                    <td style="color: white;">-</td>
+                </tr>
+                <tr>
+                    <th style="color: white;">Numéro de Téléphone</th>
+                    <td style="color: white;">-</td>
+                </tr>
+            </tbody>
+        </table>
+    {% endif %}
 
-    {{ include('user/_delete_form.html.twig') }}
 {% endblock %}

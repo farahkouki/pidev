@@ -11,6 +11,9 @@ use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
 use Symfony\Component\Security\Core\Security;
+use Symfony\Component\Security\Core\Authentication\Token\Storage\TokenStorageInterface;
+
+
 
 #[Route('/user')]
 class UserController extends AbstractController
@@ -53,18 +56,23 @@ class UserController extends AbstractController
         ]);
     }
 
-    #[Route('/{id}', name: 'app_user_delete', methods: ['POST'])]public function delete(Request $request, User $user, EntityManagerInterface $entityManager, TokenStorageInterface $tokenStorage, AuthenticationUtils $authenticationUtils): Response
-{
-    if ($this->isCsrfTokenValid('delete'.$user->getId(), $request->request->get('_token'))) {
-        $entityManager->remove($user);
-        $entityManager->flush();
+    #[Route('/{id}', name: 'app_user_delete', methods: ['POST'])]
+    public function delete(
+        Request $request,
+        User $user,
+        EntityManagerInterface $entityManager,
+        TokenStorageInterface $tokenStorage
+    ): Response {
+        if ($this->isCsrfTokenValid('delete'.$user->getId(), $request->request->get('_token'))) {
+            $entityManager->remove($user);
+            $entityManager->flush();
+        }
+
+        // Déconnexion de l'utilisateur (facultatif, dépend de votre logique d'application)
+        $tokenStorage->setToken(null);
+
+        return $this->redirectToRoute('app_register');
     }
-
-    // Déconnexion de l'utilisateur
-    $tokenStorage->setToken(null);
-
-    return $this->redirectToRoute('app_register');
-}
 
     #[Route('/profile', name: 'app_user_profile')]
 public function profile(Security $security): Response

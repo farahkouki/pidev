@@ -142,25 +142,59 @@ public function deleteAdmin(Request $request, User $user, EntityManagerInterface
     return $this->redirectToRoute('app_list_users', [], Response::HTTP_SEE_OTHER);
 }
 
+
+
 #[Route('/search_users', name: 'search_users')]
-    public function searchUsers(Request $request, EntityManagerInterface $entityManager): Response
-    {
-        $searchQuery = $request->query->get('search_query');
+public function searchUsers(Request $request, EntityManagerInterface $entityManager): Response
+{
+    // Retrieve search parameters from the request
+    $searchQuery = $request->query->get('search_query');
+    $searchParameters = [
+        'prenom' => $request->query->get('prenom'),
+        'nom' => $request->query->get('nom'),
+        'email' => $request->query->get('email'),
+        // Add more parameters as needed
+    ];
 
-        $users = $entityManager->getRepository(User::class)
-            ->createQueryBuilder('u')
-            ->where('u.prenom LIKE :query')
-            ->orWhere('u.email LIKE :query')
-            ->orWhere('u.nom LIKE :query')
-            ->setParameter('query', '%' . $searchQuery . '%')
-            ->getQuery()
-            ->getResult();
+    // Retrieve sorting parameters from the request
+    $sortField = $request->query->get('sort_field', 'id'); // Default to sorting by 'id'
+    $sortOrder = $request->query->get('sort_order', 'asc'); // Default to ascending order
 
-        return $this->render('user/index.html.twig', [
-            'users' => $users,
-        ]);
+    $queryBuilder = $entityManager->getRepository(User::class)
+        ->createQueryBuilder('u');
+
+    // Add conditions for each search parameter
+    foreach ($searchParameters as $field => $value) {
+        if ($value !== null) {
+            if ($field === 'email') {
+                // Exclude domain from email search
+                $queryBuilder->andWhere("SUBSTRING(u.$field, 1, LENGTH(u.$field) - LENGTH(:domain)) LIKE :$field")
+                    ->setParameter('domain', strlen('@gmail.com'));
+            } else {
+                $queryBuilder->andWhere("u.$field LIKE :$field")
+                    ->setParameter($field, '%' . $value . '%');
+            }
+        }
     }
-    
+
+    // Add a global search condition if a general query is provided
+    if ($searchQuery !== null) {
+        $queryBuilder->andWhere('SUBSTRING(u.email, 1, LENGTH(u.email) - LENGTH(:domain)) LIKE :query OR u.prenom LIKE :query OR u.nom LIKE :query')
+            ->setParameter('domain', strlen('@gmail.com'))
+            ->setParameter('query', '%' . $searchQuery . '%');
+    }
+
+    // Add sorting conditions
+    $queryBuilder->orderBy("u.$sortField", $sortOrder);
+
+    $users = $queryBuilder->getQuery()->getResult();
+
+    return $this->render('user/index.html.twig', [
+        'users' => $users,
+    ]);
+}
+
+
 
 
 }
